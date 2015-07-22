@@ -148,7 +148,7 @@ StringUtils.chop = function(str){
 // Checks if String contains a search character, handling null.
 // static boolean	contains(String str, String searchStr) 
 // Checks if String contains a search String, handling null.
-StringUtils.contains = function(){
+StringUtils.contains = function(str, search){
 	throw new Error("UnsupportedOperationException")
 }
 
