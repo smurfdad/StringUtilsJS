@@ -105,8 +105,34 @@ QUnit.test( "center(String str, int size, String/char padChar) ", function( asse
 
 });
 
-QUnit.test( "chomp(String str)", function( assert ) {assert.expect(0);});
-QUnit.test( "chomp(String str, String separator) ", function( assert ) {assert.expect(0);});
+QUnit.test( "chomp(String str)", function( assert ) {
+	assert.equal( StringUtils.chomp(null), null, "StringUtils.chomp(null) = null");
+	assert.equal( StringUtils.chomp(undefined), null, "StringUtils.chomp(undefined) = null");
+	assert.equal( StringUtils.chomp(""), "", "StringUtils.chomp(\"\") = \"\"");
+	assert.equal( StringUtils.chomp("abc \r"), "abc ", "StringUtils.chomp(\"abc \\r\") = \"abc \"");
+	assert.equal( StringUtils.chomp("abc\n"), "abc", "StringUtils.chomp(\"abc\\n\") = \"abc\"");
+	assert.equal( StringUtils.chomp("abc\r\n"), "abc", "StringUtils.chomp(\"abc\\r\\n\") = \"abc\"");
+	assert.equal( StringUtils.chomp("abc\r\n\r\n"), "abc\r\n", "StringUtils.chomp(\"abc\\r\\n\\r\\n\") = \"abc\\r\\n\"");
+	assert.equal( StringUtils.chomp("abc\n\r"), "abc\n", "StringUtils.chomp(\"abc\\n\\r\") = \"abc\\n\"");
+	assert.equal( StringUtils.chomp("abc\n\rabc"), "abc\n\rabc", "StringUtils.chomp(\"abc\\n\\rabc\") = \"abc\\n\\rabc\"");
+	assert.equal( StringUtils.chomp("\r"), "", "StringUtils.chomp(\"\\r\") = \"\"");
+	assert.equal( StringUtils.chomp("\n"), "", "StringUtils.chomp(\"\\n\") = \"\"");
+	assert.equal( StringUtils.chomp("\r\n"), "", "StringUtils.chomp(\"\\r\\n\") = \"\"");
+});
+QUnit.test( "chomp(String str, String separator) ", function( assert ) {
+	assert.equal( StringUtils.chomp(null, "z"), null, "StringUtils.chomp(null, *) = null");
+	assert.equal( StringUtils.chomp(undefined, "z"), null, "StringUtils.chomp(undefined, *) = null");
+	assert.equal( StringUtils.chomp("", "z"), "", "StringUtils.chomp(\"\", *) = \"\"");
+	assert.equal( StringUtils.chomp("foobar", "bar"), "foo", "StringUtils.chomp(\"foobar\", \"bar\") = \"foo\"");
+	assert.equal( StringUtils.chomp("foobar", "baz"), "foobar", "StringUtils.chomp(\"foobar\", \"baz\") = \"foobar\"");
+	assert.equal( StringUtils.chomp("foo", "foo"), "", "StringUtils.chomp(\"foo\", \"foo\") = \"\"");
+	assert.equal( StringUtils.chomp("foo ", "foo"), "foo ", "StringUtils.chomp(\"foo \", \"foo\") = \"foo \"");
+	assert.equal( StringUtils.chomp(" foo", "foo"), " ", "StringUtils.chomp(\" foo\", \"foo\") = \" \"");
+	assert.equal( StringUtils.chomp("foo", "foooo"), "foo", "StringUtils.chomp(\"foo\", \"foooo\") = \"foo\"");
+	assert.equal( StringUtils.chomp("foo", ""), "foo", "StringUtils.chomp(\"foo\", \"\") = \"foo\"");
+	assert.equal( StringUtils.chomp("foo", null), "foo", "StringUtils.chomp(\"foo\", null) = \"foo\"");
+	assert.equal( StringUtils.chomp("foo", undefined), "foo", "StringUtils.chomp(\"foo\", undefined) = \"foo\"");
+});
 QUnit.test( "contains(String str, char/string searchChar) ", function( assert ) {assert.expect(0);});
 QUnit.test( "containsAny(String str, char[] searchChars)", function( assert ) {assert.expect(0);});
 QUnit.test( "containsAny(String str, String searchChars)", function( assert ) {assert.expect(0);});

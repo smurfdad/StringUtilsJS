@@ -98,7 +98,7 @@ StringUtils.abbreviateMiddle = function(str, middle, length){
 // static String	capitalize(String str) 
 StringUtils.capitalize = function(str){
 	var strLen = 0;
-	if (typeof(str) === undefined){
+	if (typeof(str) === "undefined"){
 		return null;
 	}
 	if (str == null || (strLen = str.length) == 0) {
@@ -114,7 +114,7 @@ StringUtils.capitalize = function(str){
 // Centers a String in a larger String of size size.
 StringUtils.center = function(str, size, pPadStr){
 
-	var padStr = typeof(pPadStr) !== undefined? pPadStr: StringUtils.EMPTY;
+	var padStr = typeof(pPadStr) !== "undefined"? pPadStr: StringUtils.EMPTY;
 	if (str == null || size <= 0) {
 		return str;
 	}
@@ -135,8 +135,40 @@ StringUtils.center = function(str, size, pPadStr){
 // Removes one newline from end of a String if it's there, otherwise leave it alone.
 // static String	chomp(String str, String separator) 
 // Removes separator from the end of str if it's there, otherwise leave it alone.
-StringUtils.chomp = function(){
-	throw new Error("UnsupportedOperationException")
+StringUtils.chomp = function(str, separator){
+	var CR = '\r';
+	var LF = '\n';
+	if (typeof(separator) !== "undefined"){
+		if (StringUtils.isEmpty(str) || separator == null) {
+			return str;
+		}
+		if (str.endsWith(separator)) {
+			return str.substring(0, str.length - separator.length);
+		}
+		return str;
+	}else{
+		if (StringUtils.isEmpty(str)) {
+			return str;
+		}
+		if (str.length == 1) {
+			var ch = str.charAt(0);
+			if (ch == CR || ch == LF) {
+				return StringUtils.EMPTY;
+			} else {
+				return str;
+			}
+		}
+		var lastIdx = str.length - 1;
+		var last = str.charAt(lastIdx);
+		if (last == LF) {
+			if (str.charAt(lastIdx - 1) == CR) {
+				lastIdx--;
+			}
+		} else if (last != CR) {
+			lastIdx++;
+		}
+		return str.substring(0, lastIdx);	
+	}
 }
 
 // static String	chop(String str) 
@@ -455,9 +487,9 @@ StringUtils.left = function(str, len) {
 // static String	leftPad(String str, int size, String padStr) 
 // Left pad a String with a specified String.
 StringUtils.leftPad = function(pStr, pSize, pPadStr) {
-	var str = typeof(pStr) !== undefined? pStr: null;
-	var size = typeof(pSize) !== undefined? pSize: 0;
-	var padStr = typeof(pPadStr) !== undefined? pPadStr: StringUtils.EMPTY;
+	var str = typeof(pStr) !== "undefined"? pStr: null;
+	var size = typeof(pSize) !== "undefined"? pSize: 0;
+	var padStr = typeof(pPadStr) !== "undefined"? pPadStr: StringUtils.EMPTY;
 	
     if (str == null) {
 		return null;
@@ -628,9 +660,9 @@ StringUtils.right = function(str, len) {
 // static String	rightPad(String str, int size, String padStr) 
 // Right pad a String with a specified String.
 StringUtils.rightPad = function(pStr, pSize, pPadStr) {
-	var str = typeof(pStr) !== undefined? pStr: null;
-	var size = typeof(pSize) !== undefined? pSize: 0;
-	var padStr = typeof(pPadStr) !== undefined? pPadStr: StringUtils.EMPTY;
+	var str = typeof(pStr) !== "undefined"? pStr: null;
+	var size = typeof(pSize) !== "undefined"? pSize: 0;
+	var padStr = typeof(pPadStr) !== "undefined"? pPadStr: StringUtils.EMPTY;
 	
     if (str == null) {
 		return null;
