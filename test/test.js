@@ -156,8 +156,24 @@ QUnit.test( "contains(String str, char/string searchChar) ", function( assert ) 
 	assert.equal( StringUtils.contains("abc", "a"), true, "StringUtils.contains(\"abc\", \"a\") = true");
 	assert.equal( StringUtils.contains("abc", "z"), false, "StringUtils.contains(\"abc\", \"z\") = false");
 });
-QUnit.test( "containsAny(String str, char[] searchChars)", function( assert ) {assert.expect(0);});
-QUnit.test( "containsAny(String str, String searchChars)", function( assert ) {assert.expect(0);});
+QUnit.test( "containsAny(String str, char[] searchChars)", function( assert ) {
+	assert.equal( StringUtils.containsAny(null, ["z","a"]), false ,"StringUtils.containsAny(null, *) = false");
+	assert.equal( StringUtils.containsAny("", ["z","a"]), false ,"StringUtils.containsAny(\"\", *) = false");
+	assert.equal( StringUtils.containsAny("zzabyycdxx", null), false ,"StringUtils.containsAny(*, null) = false");
+	assert.equal( StringUtils.containsAny("zzabyycdxx", []), false ,"StringUtils.containsAny(*, []) = false");
+	assert.equal( StringUtils.containsAny("zzabyycdxx",['z','a']), true, "StringUtils.containsAny(\"zzabyycdxx\",[\'z\',\'a\']) = true ");
+	assert.equal( StringUtils.containsAny("zzabyycdxx",['b','y']), true, "StringUtils.containsAny(\"zzabyycdxx\",[\'b\',\'y\']) = true ");
+	assert.equal( StringUtils.containsAny("aba", ['z']), false, "StringUtils.containsAny(\"aba\", [\'z\']) = false");
+});
+QUnit.test( "containsAny(String str, String searchChars)", function( assert ) {
+	assert.equal( StringUtils.containsAny(null, "za"), false, "StringUtils.containsAny(null, *) = false");
+	assert.equal( StringUtils.containsAny("", "za"), false, "StringUtils.containsAny(\"\", *) = false");
+	assert.equal( StringUtils.containsAny("zzabyycdxx", null), false, "StringUtils.containsAny(*, null) = false");
+	assert.equal( StringUtils.containsAny("zzabyycdxx", ""), false, "StringUtils.containsAny(*, \"\") = false");
+	assert.equal( StringUtils.containsAny("zzabyycdxx", "za"), true , "StringUtils.containsAny(\"zzabyycdxx\", \"za\") = true");
+	assert.equal( StringUtils.containsAny("zzabyycdxx", "by"), true , "StringUtils.containsAny(\"zzabyycdxx\", \"by\") = true ");
+	assert.equal( StringUtils.containsAny("aba","z"), false, "StringUtils.containsAny(\"aba\",\"z\") = false");
+});
 QUnit.test( "containsIgnoreCase(String str, String searchStr) ", function( assert ) {assert.expect(0);});
 QUnit.test( "containsNone(String str, char[] searchChars) ", function( assert ) {assert.expect(0);});
 QUnit.test( "containsNone(String str, String invalidChars) ", function( assert ) {assert.expect(0);});

@@ -1,7 +1,9 @@
 function CharUtils(){}
 CharUtils.CR = '\r';
 CharUtils.LF = '\n';
-
+CharUtils.isHighSurrogate= function(ch) {
+	return ('\uD800' <= ch && '\uDBFF' >= ch);
+}
 function StringUtils() {}
 StringUtils.EMPTY = "";
 StringUtils.INDEX_NOT_FOUND = -1;
@@ -208,8 +210,43 @@ StringUtils.contains = function(str, searchStr){
 // Checks if the String contains any character in the given set of characters.
 // static boolean	containsAny(String str, String searchChars) 
 // Checks if the String contains any character in the given set of characters.
-StringUtils.containsAny = function(){
-	throw new Error("UnsupportedOperationException")
+StringUtils.containsAny = function(str, pSearchChars){
+	var searchChars;
+	if (pSearchChars == null || typeof(pSearchChars) === "undefined"){
+		return false;
+	}else if (typeof(pSearchChars) === "string"){
+		searchChars = pSearchChars.split(StringUtils.EMPTY);
+	}else{
+		searchChars = pSearchChars;
+	}
+
+	if (StringUtils.isEmpty(str) || searchChars.length == 0) {
+		return false;
+	}
+	var csLength = str.length;
+	var searchLength = searchChars.length;
+	var csLast = csLength - 1;
+	var searchLast = searchLength - 1;
+	for (var i = 0; i < csLength; i++) {
+		var ch = str.charAt(i);
+		for (var j = 0; j < searchLength; j++) {
+			if (searchChars[j] == ch) {
+				if (CharUtils.isHighSurrogate(ch)) {
+					if (j == searchLast) {
+						// missing low surrogate, fine, like String.indexOf(String)
+						return true;
+					}
+					if (i < csLast && searchChars[j + 1] == str.charAt(i + 1)) {
+						return true;
+					}
+				} else {
+					// ch is in the Basic Multilingual Plane
+					return true;
+				}
+			}
+		}
+	}
+	return false;
 }
 
 // static boolean	containsIgnoreCase(String str, String searchStr) 
