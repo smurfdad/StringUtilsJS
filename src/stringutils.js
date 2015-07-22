@@ -112,22 +112,23 @@ StringUtils.capitalize = function(str){
 // Centers a String in a larger String of size size.
 // static String	center(String str, int size, String padStr) 
 // Centers a String in a larger String of size size.
-StringUtils.center = function(str, size){
-	throw new Error("UnsupportedOperationException")
-	        // if (str == null || size <= 0) {
-// 5029            return str;
-// 5030        }
-// 5031        if (isEmpty(padStr)) {
-// 5032            padStr = " ";
-// 5033        }
-// 5034        int strLen = str.length();
-// 5035        int pads = size - strLen;
-// 5036        if (pads <= 0) {
-// 5037            return str;
-// 5038        }
-// 5039        str = leftPad(str, strLen + pads / 2, padStr);
-// 5040        str = rightPad(str, size, padStr);
-// 5041        return str;
+StringUtils.center = function(str, size, pPadStr){
+
+	var padStr = typeof(pPadStr) !== undefined? pPadStr: StringUtils.EMPTY;
+	if (str == null || size <= 0) {
+		return str;
+	}
+	if (StringUtils.isEmpty(padStr)) {
+	   padStr = " ";
+	}
+	var strLen = str.length;
+	var pads = size - strLen;
+	if (pads <= 0) {
+	   return str;
+	}
+	str = StringUtils.leftPad(str, strLen + Math.floor(pads / 2), padStr);
+	str = StringUtils.rightPad(str, size, padStr);
+	return str;
 }
 
 // static String	chomp(String str) 
@@ -453,8 +454,43 @@ StringUtils.left = function(str, len) {
 // Left pad a String with a specified character.
 // static String	leftPad(String str, int size, String padStr) 
 // Left pad a String with a specified String.
-StringUtils.leftPad = function() {
-	throw new Error("UnsupportedOperationException")
+StringUtils.leftPad = function(pStr, pSize, pPadStr) {
+	var str = typeof(pStr) !== undefined? pStr: null;
+	var size = typeof(pSize) !== undefined? pSize: 0;
+	var padStr = typeof(pPadStr) !== undefined? pPadStr: StringUtils.EMPTY;
+	
+    if (str == null) {
+		return null;
+	}
+	if (StringUtils.isEmpty(padStr)) {
+		padStr = " ";
+	}
+	var padLen = padStr.length;
+	var strLen = str.length;
+	var pads = size - strLen;
+	if (pads <= 0) {
+		return str; // returns original String when possible
+	}
+	if (padLen == 1 && pads <= StringUtils.PAD_LIMIT) {
+		var resultado = StringUtils.EMPTY;
+		for(var i = 0; i < pads; i++){
+			resultado += padStr;
+		}
+		return resultado + str;
+	}
+
+	if (pads == padLen) {
+		return padStr + str;
+	} else if (pads < padLen) {
+		return padStr.substring(0, pads) + str;
+	 } else {
+		var resultado = StringUtils.EMPTY;
+		for(var i = 0; i < pads; i++){
+			resultado += padStr;
+		}
+		resultado = resultado.substring(0, pads);
+		return resultado + str;
+	}	
 }
 
 // static int	length(String str) 
@@ -591,8 +627,43 @@ StringUtils.right = function(str, len) {
 // Right pad a String with a specified character.
 // static String	rightPad(String str, int size, String padStr) 
 // Right pad a String with a specified String.
-StringUtils.rightPad = function() {
-	throw new Error("UnsupportedOperationException")
+StringUtils.rightPad = function(pStr, pSize, pPadStr) {
+	var str = typeof(pStr) !== undefined? pStr: null;
+	var size = typeof(pSize) !== undefined? pSize: 0;
+	var padStr = typeof(pPadStr) !== undefined? pPadStr: StringUtils.EMPTY;
+	
+    if (str == null) {
+		return null;
+	}
+	if (StringUtils.isEmpty(padStr)) {
+		padStr = " ";
+	}
+	var padLen = padStr.length;
+	var strLen = str.length;
+	var pads = size - strLen;
+	if (pads <= 0) {
+		return str; // returns original String when possible
+	}
+	if (padLen == 1 && pads <= StringUtils.PAD_LIMIT) {
+		var resultado = StringUtils.EMPTY;
+		for(var i = 0; i < pads; i++){
+			resultado += padStr;
+		}
+		return str + resultado;
+	}
+
+	if (pads == padLen) {
+		return str + padStr;
+	} else if (pads < padLen) {
+		return padStr.substring(0, pads) + str;
+	 } else {
+		var resultado = StringUtils.EMPTY;
+		for(var i = 0; i < pads; i++){
+			resultado += padStr;
+		}
+		resultado = resultado.substring(0, pads);
+		return str + resultado;
+	}	
 }
 
 // static String[]	split(String str) 
