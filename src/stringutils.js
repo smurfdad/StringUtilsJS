@@ -477,195 +477,313 @@ StringUtils.mid = function(str, pos, len) {
 
 // static String	normalizeSpace(String str) 
 // Similar to http://www.w3.org/TR/xpath/#function-normalize -space
+StringUtils.normalizeSpace = function(str) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static int	ordinalIndexOf(String str, String searchStr, int ordinal) 
 // Finds the n-th index within a String, handling null.
+StringUtils.ordinalIndexOf = function(str, searchStr, ordinal) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	overlay(String str, String overlay, int start, int end) 
 // Overlays part of a String with another String.
+StringUtils.overlay = function(str, overlay, start, end) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	remove(String str, char remove) 
 // Removes all occurrences of a character from within the source string.
-
 // static String	remove(String str, String remove) 
 // Removes all occurrences of a substring from within the source string.
+StringUtils.remove = function(str, remove) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	removeEnd(String str, String remove) 
 // Removes a substring only if it is at the end of a source string, otherwise returns the source string.
+StringUtils.removeEnd = function(str, remove) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	removeEndIgnoreCase(String str, String remove) 
 // Case insensitive removal of a substring if it is at the end of a source string, otherwise returns the source string.
+StringUtils.removeEndIgnoreCase = function(str, remove) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	removeStart(String str, String remove) 
 // Removes a substring only if it is at the begining of a source string, otherwise returns the source string.
+StringUtils.removeStart = function(str, remove) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	removeStartIgnoreCase(String str, String remove) 
 // Case insensitive removal of a substring if it is at the begining of a source string, otherwise returns the source string.
+StringUtils.removeStartIgnoreCase = function(str, remove) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	repeat(String str, int repeat) 
 // Repeat a String repeat times to form a new String.
-
 // static String	repeat(String str, String separator, int repeat) 
 // Repeat a String repeat times to form a new String, with a String separator injected each time.
+StringUtils.repeat = function() {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	replace(String text, String searchString, String replacement) 
 // Replaces all occurrences of a String within another String.
-
 // static String	replace(String text, String searchString, String replacement, int max) 
 // Replaces a String with another String inside a larger String, for the first max values of the search String.
+StringUtils.replace = function() {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	replaceChars(String str, char searchChar, char replaceChar) 
 // Replaces all occurrences of a character in a String with another.
-
 // static String	replaceChars(String str, String searchChars, String replaceChars) 
 // Replaces multiple characters in a String in one go.
+StringUtils.replaceChars = function(str, searchChars, replaceChars) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	replaceEach(String text, String[] searchList, String[] replacementList) 
 // Replaces all occurrences of Strings within another String.
+StringUtils.replaceEach = function(text, searchList, replacementList) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	replaceEachRepeatedly(String text, String[] searchList, String[] replacementList) 
 // Replaces all occurrences of Strings within another String.
+StringUtils.replaceEachRepeatedly = function(text, searchList, replacementList) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	replaceOnce(String text, String searchString, String replacement) 
 // Replaces a String with another String inside a larger String, once.
+StringUtils.replaceOnce = function(text, searchString, replacement) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	reverse(String str) 
 // Reverses a String as per StrBuilder.reverse().
+StringUtils.reverse = function(str) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	reverseDelimited(String str, char separatorChar) 
 // Reverses a String that is delimited by a specific character.
+StringUtils.reverseDelimited = function(str, separatorChar) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	right(String str, int len) 
 // Gets the rightmost len characters of a String.
+StringUtils.right = function(str, len) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	rightPad(String str, int size) 
 // Right pad a String with spaces (' ').
-
 // static String	rightPad(String str, int size, char padChar) 
 // Right pad a String with a specified character.
-
 // static String	rightPad(String str, int size, String padStr) 
 // Right pad a String with a specified String.
+StringUtils.rightPad = function() {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String[]	split(String str) 
 // Splits the provided text into an array, using whitespace as the separator.
-
 // static String[]	split(String str, char separatorChar) 
 // Splits the provided text into an array, separator specified.
-
 // static String[]	split(String str, String separatorChars) 
 // Splits the provided text into an array, separators specified.
-
 // static String[]	split(String str, String separatorChars, int max) 
 // Splits the provided text into an array with a maximum length, separators specified.
+StringUtils.split = function() {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String[]	splitByCharacterType(String str) 
 // Splits a String by Character type as returned by java.lang.Character.getType(char).
+StringUtils.splitByCharacterType = function(str) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String[]	splitByCharacterTypeCamelCase(String str) 
 // Splits a String by Character type as returned by java.lang.Character.getType(char).
+StringUtils.splitByCharacterTypeCamelCase = function(str) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String[]	splitByWholeSeparator(String str, String separator) 
 // Splits the provided text into an array, separator string specified.
-
 // static String[]	splitByWholeSeparator(String str, String separator, int max) 
 // Splits the provided text into an array, separator string specified.
+StringUtils.splitByWholeSeparator = function() {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String[]	splitByWholeSeparatorPreserveAllTokens(String str, String separator) 
 // Splits the provided text into an array, separator string specified.
-
 // static String[]	splitByWholeSeparatorPreserveAllTokens(String str, String separator, int max) 
 // Splits the provided text into an array, separator string specified.
+StringUtils.splitByWholeSeparatorPreserveAllTokens = function() {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String[]	splitPreserveAllTokens(String str) 
 // Splits the provided text into an array, using whitespace as the separator, preserving all tokens, including empty tokens created by adjacent separators.
-
 // static String[]	splitPreserveAllTokens(String str, char separatorChar) 
 // Splits the provided text into an array, separator specified, preserving all tokens, including empty tokens created by adjacent separators.
-
 // static String[]	splitPreserveAllTokens(String str, String separatorChars) 
 // Splits the provided text into an array, separators specified, preserving all tokens, including empty tokens created by adjacent separators.
-
 // static String[]	splitPreserveAllTokens(String str, String separatorChars, int max) 
 // Splits the provided text into an array with a maximum length, separators specified, preserving all tokens, including empty tokens created by adjacent separators.
+StringUtils.splitPreserveAllTokens = function() {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static boolean	startsWith(String str, String prefix) 
 // Check if a String starts with a specified prefix.
+StringUtils.startsWith = function(str, prefix) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static boolean	startsWithAny(String string, String[] searchStrings) 
 // Check if a String starts with any of an array of specified strings.
+StringUtils.startsWithAny = function(string, searchStrings) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static boolean	startsWithIgnoreCase(String str, String prefix) 
 // Case insensitive check if a String starts with a specified prefix.
+StringUtils.startsWithIgnoreCase = function(str, prefix) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	strip(String str) 
 // Strips whitespace from the start and end of a String.
-
 // static String	strip(String str, String stripChars) 
 // Strips any of a set of characters from the start and end of a String.
+StringUtils.strip = function() {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String[]	stripAll(String[] strs) 
 // Strips whitespace from the start and end of every String in an array.
-
 // static String[]	stripAll(String[] strs, String stripChars) 
 // Strips any of a set of characters from the start and end of every String in an array.
+StringUtils.stripAll = function() {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	stripEnd(String str, String stripChars) 
 // Strips any of a set of characters from the end of a String.
+StringUtils.stripEnd = function(str, stripChars) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	stripStart(String str, String stripChars) 
 // Strips any of a set of characters from the start of a String.
+StringUtils.stripStart = function(str, stripChars) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	stripToEmpty(String str) 
 // Strips whitespace from the start and end of a String returning an empty String if null input.
+StringUtils.stripToEmpty = function(str) {
+	throw new Error("UnsupportedOperationException")
+}
+
 
 // static String	stripToNull(String str) 
 // Strips whitespace from the start and end of a String returning null if the String is empty ("") after the strip.
+StringUtils.stripToNull = function(str) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	substring(String str, int start) 
 // Gets a substring from the specified String avoiding exceptions.
-
 // static String	substring(String str, int start, int end) 
 // Gets a substring from the specified String avoiding exceptions.
+StringUtils.substring = function() {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	substringAfter(String str, String separator) 
 // Gets the substring after the first occurrence of a separator.
+StringUtils.substringAfter = function(str, separator) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	substringAfterLast(String str, String separator) 
 // Gets the substring after the last occurrence of a separator.
+StringUtils.substringAfterLast = function(str, separator) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	substringBefore(String str, String separator) 
 // Gets the substring before the first occurrence of a separator.
+StringUtils.substringBefore = function(str, separator) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	substringBeforeLast(String str, String separator) 
 // Gets the substring before the last occurrence of a separator.
+StringUtils.substringBeforeLast = function(str, separator) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	substringBetween(String str, String tag) 
 // Gets the String that is nested in between two instances of the same String.
-
 // static String	substringBetween(String str, String open, String close) 
 // Gets the String that is nested in between two Strings.
+StringUtils.substringBetween = function() {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String[]	substringsBetween(String str, String open, String close) 
 // Searches a String for substrings delimited by a start and end tag, returning all matching substrings in an array.
+StringUtils.substringsBetween = function(str, open, close) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	swapCase(String str) 
 // Swaps the case of a String changing upper and title case to lower case, and lower case to upper case.
+StringUtils.swapCase = function(str) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	trim(String str) 
 // Removes control characters (char <= 32) from both ends of this String, handling null by returning null.
+StringUtils.trim = function(str) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	trimToEmpty(String str) 
 // Removes control characters (char <= 32) from both ends of this String returning an empty String ("") if the String is empty ("") after the trim or if it is null.
+StringUtils.trimToEmpty = function(str) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	trimToNull(String str) 
 // Removes control characters (char <= 32) from both ends of this String returning null if the String is empty ("") after the trim or if it is null.
+StringUtils.trimToNull = function(str) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	uncapitalize(String str) 
 // Uncapitalizes a String changing the first letter to title case as per Character.toLowerCase(char).
+StringUtils.uncapitalize = function(str) {
+	throw new Error("UnsupportedOperationException")
+}
 
 // static String	upperCase(String str) 
 // Converts a String to upper case as per String.toUpperCase().
-
-// static String	upperCase(String str, Locale locale) 
-// Converts a String to upper case as per String.toUpperCase(Locale).
+StringUtils.upperCase = function(str) {
+	throw new Error("UnsupportedOperationException")
+}
