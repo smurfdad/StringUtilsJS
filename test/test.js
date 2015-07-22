@@ -133,6 +133,19 @@ QUnit.test( "chomp(String str, String separator) ", function( assert ) {
 	assert.equal( StringUtils.chomp("foo", null), "foo", "StringUtils.chomp(\"foo\", null) = \"foo\"");
 	assert.equal( StringUtils.chomp("foo", undefined), "foo", "StringUtils.chomp(\"foo\", undefined) = \"foo\"");
 });
+QUnit.test( "chop(String str) ", function( assert ) {
+	assert.equal( StringUtils.chop(null), null, "StringUtils.chop(null) = null");
+	assert.equal( StringUtils.chop(""), "", "StringUtils.chop(\"\") = \"\"");
+	assert.equal( StringUtils.chop("abc \r"), "abc ", "StringUtils.chop(\"abc \\r\") = \"abc \"");
+	assert.equal( StringUtils.chop("abc\n"), "abc", "StringUtils.chop(\"abc\\n\") = \"abc\"");
+	assert.equal( StringUtils.chop("abc\r\n"), "abc", "StringUtils.chop(\"abc\\r\\n\") = \"abc\"");
+	assert.equal( StringUtils.chop("abc"), "ab", "StringUtils.chop(\"abc\") = \"ab\"");
+	assert.equal( StringUtils.chop("abc\nabc"), "abc\nab", "StringUtils.chop(\"abc\\nabc\") = \"abc\\nab\"");
+	assert.equal( StringUtils.chop("a"), "", "StringUtils.chop(\"a\") = \"\"");
+	assert.equal( StringUtils.chop("\r"), "", "StringUtils.chop(\"\\r\") = \"\"");
+	assert.equal( StringUtils.chop("\n"), "", "StringUtils.chop(\"\\n\") = \"\"");
+	assert.equal( StringUtils.chop("\r\n"), "", "StringUtils.chop(\"\\r\\n\") = \"\"");
+});
 QUnit.test( "contains(String str, char/string searchChar) ", function( assert ) {assert.expect(0);});
 QUnit.test( "containsAny(String str, char[] searchChars)", function( assert ) {assert.expect(0);});
 QUnit.test( "containsAny(String str, String searchChars)", function( assert ) {assert.expect(0);});

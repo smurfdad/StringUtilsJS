@@ -1,5 +1,8 @@
-function StringUtils() {}
+function CharUtils(){}
+CharUtils.CR = '\r';
+CharUtils.LF = '\n';
 
+function StringUtils() {}
 StringUtils.EMPTY = "";
 StringUtils.INDEX_NOT_FOUND = -1;
 StringUtils.PAD_LIMIT = 8192;
@@ -136,8 +139,6 @@ StringUtils.center = function(str, size, pPadStr){
 // static String	chomp(String str, String separator) 
 // Removes separator from the end of str if it's there, otherwise leave it alone.
 StringUtils.chomp = function(str, separator){
-	var CR = '\r';
-	var LF = '\n';
 	if (typeof(separator) !== "undefined"){
 		if (StringUtils.isEmpty(str) || separator == null) {
 			return str;
@@ -152,7 +153,7 @@ StringUtils.chomp = function(str, separator){
 		}
 		if (str.length == 1) {
 			var ch = str.charAt(0);
-			if (ch == CR || ch == LF) {
+			if (ch == CharUtils.CR || ch == CharUtils.LF) {
 				return StringUtils.EMPTY;
 			} else {
 				return str;
@@ -160,11 +161,11 @@ StringUtils.chomp = function(str, separator){
 		}
 		var lastIdx = str.length - 1;
 		var last = str.charAt(lastIdx);
-		if (last == LF) {
-			if (str.charAt(lastIdx - 1) == CR) {
+		if (last == CharUtils.LF) {
+			if (str.charAt(lastIdx - 1) == CharUtils.CR) {
 				lastIdx--;
 			}
-		} else if (last != CR) {
+		} else if (last != CharUtils.CR) {
 			lastIdx++;
 		}
 		return str.substring(0, lastIdx);	
@@ -174,7 +175,22 @@ StringUtils.chomp = function(str, separator){
 // static String	chop(String str) 
 // Remove the last character from a String.
 StringUtils.chop = function(str){
-	throw new Error("UnsupportedOperationException")
+	if (str == null) {
+        return null;
+    }
+    var strLen = str.length;
+    if (strLen < 2) {
+        return StringUtils.EMPTY;
+    }
+    var lastIdx = strLen - 1;
+    var ret = str.substring(0, lastIdx);
+    var last = str.charAt(lastIdx);
+    if (last == CharUtils.LF) {
+        if (ret.charAt(lastIdx - 1) == CharUtils.CR) {
+            return ret.substring(0, lastIdx - 1);
+        }
+    }
+    return ret;
 }
 
 // static boolean	contains(String str, char searchChar) 
