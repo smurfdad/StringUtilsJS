@@ -146,7 +146,16 @@ QUnit.test( "chop(String str) ", function( assert ) {
 	assert.equal( StringUtils.chop("\n"), "", "StringUtils.chop(\"\\n\") = \"\"");
 	assert.equal( StringUtils.chop("\r\n"), "", "StringUtils.chop(\"\\r\\n\") = \"\"");
 });
-QUnit.test( "contains(String str, char/string searchChar) ", function( assert ) {assert.expect(0);});
+QUnit.test( "contains(String str, char/string searchChar) ", function( assert ) {
+	assert.equal( StringUtils.contains(null, "a"), false, "StringUtils.contains(null, *) = false");
+	assert.equal( StringUtils.contains(undefined, "a"), false, "StringUtils.contains(undefined, *) = false");
+	assert.equal( StringUtils.contains("abc", null), false, "StringUtils.contains(*, null) = false");
+	assert.equal( StringUtils.contains("abc", undefined), false, "StringUtils.contains(*, undefined) = false");
+	assert.equal( StringUtils.contains("", ""), true, "StringUtils.contains(\"\", \"\") = true");
+	assert.equal( StringUtils.contains("abc", ""), true, "StringUtils.contains(\"abc\", \"\") = true");
+	assert.equal( StringUtils.contains("abc", "a"), true, "StringUtils.contains(\"abc\", \"a\") = true");
+	assert.equal( StringUtils.contains("abc", "z"), false, "StringUtils.contains(\"abc\", \"z\") = false");
+});
 QUnit.test( "containsAny(String str, char[] searchChars)", function( assert ) {assert.expect(0);});
 QUnit.test( "containsAny(String str, String searchChars)", function( assert ) {assert.expect(0);});
 QUnit.test( "containsIgnoreCase(String str, String searchStr) ", function( assert ) {assert.expect(0);});

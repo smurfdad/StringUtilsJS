@@ -197,8 +197,11 @@ StringUtils.chop = function(str){
 // Checks if String contains a search character, handling null.
 // static boolean	contains(String str, String searchStr) 
 // Checks if String contains a search String, handling null.
-StringUtils.contains = function(str, search){
-	throw new Error("UnsupportedOperationException")
+StringUtils.contains = function(str, searchStr){
+	if (str == null || searchStr == null) {
+		return false;
+	}
+	return str.indexOf(searchStr) >= 0;
 }
 
 // static boolean	containsAny(String str, char[] searchChars) 
