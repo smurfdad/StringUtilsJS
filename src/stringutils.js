@@ -252,15 +252,15 @@ StringUtils.containsAny = function(str, pSearchChars){
 // static boolean	containsIgnoreCase(String str, String searchStr) 
 // Checks if String contains a search String irrespective of case, handling null.
 StringUtils.containsIgnoreCase = function(str, searchStr) {
-	throw new Error("UnsupportedOperationException")
+	return StringUtils.contains(StringUtils.lowerCase(str), StringUtils.lowerCase(searchStr));
 }
 
 // static boolean	containsNone(String str, char[] searchChars) 
 // Checks that the String does not contain certain characters.
 // static boolean	containsNone(String str, String invalidChars) 
 // Checks that the String does not contain certain characters.
-StringUtils.containsNone = function() {
-	throw new Error("UnsupportedOperationException")
+StringUtils.containsNone = function(str, searchChars) {
+	return !StringUtils.containsAny(str, searchChars);
 }
 
 // static boolean	containsOnly(String str, char[] valid) 
@@ -590,7 +590,10 @@ StringUtils.length = function(str) {
 // static String	lowerCase(String str) 
 // Converts a String to lower case as per String.toLowerCase().
 StringUtils.lowerCase = function(str) {
-	throw new Error("UnsupportedOperationException")
+	if (str == null) {
+		return null;
+	}
+	return str.toLowerCase();
 }
 
 // static String	mid(String str, int pos, int len) 

@@ -174,9 +174,34 @@ QUnit.test( "containsAny(String str, String searchChars)", function( assert ) {
 	assert.equal( StringUtils.containsAny("zzabyycdxx", "by"), true , "StringUtils.containsAny(\"zzabyycdxx\", \"by\") = true ");
 	assert.equal( StringUtils.containsAny("aba","z"), false, "StringUtils.containsAny(\"aba\",\"z\") = false");
 });
-QUnit.test( "containsIgnoreCase(String str, String searchStr) ", function( assert ) {assert.expect(0);});
-QUnit.test( "containsNone(String str, char[] searchChars) ", function( assert ) {assert.expect(0);});
-QUnit.test( "containsNone(String str, String invalidChars) ", function( assert ) {assert.expect(0);});
+QUnit.test( "containsIgnoreCase(String str, String searchStr) ", function( assert ) {
+	assert.equal( StringUtils.containsIgnoreCase(null, "a"), false, "StringUtils.containsIgnoreCase(null, *) = false");
+	assert.equal( StringUtils.containsIgnoreCase("abc", null), false, "StringUtils.containsIgnoreCase(*, null) = false");
+	assert.equal( StringUtils.containsIgnoreCase("", ""), true, "StringUtils.containsIgnoreCase(\"\", \"\") = true");
+	assert.equal( StringUtils.containsIgnoreCase("abc", ""), true, "StringUtils.containsIgnoreCase(\"abc\", \"\") = true");
+	assert.equal( StringUtils.containsIgnoreCase("abc", "a"), true, "StringUtils.containsIgnoreCase(\"abc\", \"a\") = true");
+	assert.equal( StringUtils.containsIgnoreCase("abc", "z"), false, "StringUtils.containsIgnoreCase(\"abc\", \"z\") = false");
+	assert.equal( StringUtils.containsIgnoreCase("abc", "A"), true, "StringUtils.containsIgnoreCase(\"abc\", \"A\") = true");
+	assert.equal( StringUtils.containsIgnoreCase("abc", "Z"), false, "StringUtils.containsIgnoreCase(\"abc\", \"A\") = true");
+});
+QUnit.test( "containsNone(String str, char[] searchChars) ", function( assert ) {
+	assert.equal( StringUtils.containsNone(null, ['x','y','z']), true, "StringUtils.containsNone(null, *) = true");
+	assert.equal( StringUtils.containsNone("abab", null), true, "StringUtils.containsNone(*, null) = true");
+	assert.equal( StringUtils.containsNone("", ['x','y','z']), true, "StringUtils.containsNone(\"\", *) = true");
+	assert.equal( StringUtils.containsNone("ab", []), true, "StringUtils.containsNone(\"ab\", []) = true");
+	assert.equal( StringUtils.containsNone("abab", ['x','y','z']), true, "StringUtils.containsNone(\"abab\", [\'x\',\'y\',\'z\']) = true");
+	assert.equal( StringUtils.containsNone("ab1", ['x','y','z']), true, "StringUtils.containsNone(\"ab1\", [\'x\',\'y\',\'z\']) = true");
+	assert.equal( StringUtils.containsNone("abz", ['x','y','z']), false, "StringUtils.containsNone(\"abz\", [\'x\',\'y\',\'z\']) = false");
+});
+QUnit.test( "containsNone(String str, String invalidChars) ", function( assert ) {
+	assert.equal( StringUtils.containsNone(null, "xyz"), true, "StringUtils.containsNone(null, *) = true");
+	assert.equal( StringUtils.containsNone("abab", null), true, "StringUtils.containsNone(*, null) = true");
+	assert.equal( StringUtils.containsNone("", "xyz"), true, "StringUtils.containsNone(\"\", *) = true");
+	assert.equal( StringUtils.containsNone("ab", ""), true, "StringUtils.containsNone(\"ab\", \"\") = true");
+	assert.equal( StringUtils.containsNone("abab", "xyz"), true, "StringUtils.containsNone(\"abab\", \"xyz\") = true");
+	assert.equal( StringUtils.containsNone("ab1", "xyz"), true, "StringUtils.containsNone(\"ab1\", \"xyz\") = true");
+	assert.equal( StringUtils.containsNone("abz", "xyz"), false, "StringUtils.containsNone(\"abz\", \"xyz\") = false");
+});
 QUnit.test( "containsOnly(String str, char[] valid) ", function( assert ) {assert.expect(0);});
 QUnit.test( "containsOnly(String str, String validChars) ", function( assert ) {assert.expect(0);});
 QUnit.test( "countMatches(String str, String sub) ", function( assert ) {assert.expect(0);});
@@ -262,7 +287,11 @@ QUnit.test( "leftPad(String str, int size, Char/String padStr) ", function( asse
 	assert.equal( StringUtils.leftPad("bat", -1, 'z'), "bat", "StringUtils.leftPad(\"bat\", -1, \'z\') = \"bat\"");
 });
 QUnit.test( "length(String str) ", function( assert ) {assert.expect(0);});
-QUnit.test( "lowerCase(String str) ", function( assert ) {assert.expect(0);});
+QUnit.test( "lowerCase(String str) ", function( assert ) {
+	assert.equal( StringUtils.lowerCase(null), null, "StringUtils.lowerCase(null)  = null");
+	assert.equal( StringUtils.lowerCase(""), "", "StringUtils.lowerCase(\"\") = \"\"");
+	assert.equal( StringUtils.lowerCase("aBc"), "abc", "StringUtils.lowerCase(\"aBc\") = \"abc\"");
+});
 QUnit.test( "mid(String str, int pos, int len) ", function( assert ) {assert.expect(0);});
 QUnit.test( "normalizeSpace(String str) ", function( assert ) {assert.expect(0);});
 QUnit.test( "ordinalIndexOf(String str, String searchStr, int ordinal) ", function( assert ) {assert.expect(0);});
