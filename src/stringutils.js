@@ -584,7 +584,11 @@ StringUtils.leftPad = function(pStr, pSize, pPadStr) {
 // static int	length(String str) 
 // Gets a String's length or 0 if the String is null.
 StringUtils.length = function(str) {
-	throw new Error("UnsupportedOperationException")
+	if (str == null){
+		return 0;
+	}else{
+		return str.length
+	}
 }
 
 // static String	lowerCase(String str) 
@@ -923,19 +927,45 @@ StringUtils.swapCase = function(str) {
 // static String	trim(String str) 
 // Removes control characters (char <= 32) from both ends of this String, handling null by returning null.
 StringUtils.trim = function(str) {
-	throw new Error("UnsupportedOperationException")
+	if (str == null) {
+		return null;
+	}
+	if (str.length == 0)
+		return "";
+	else {
+		// Loop through string starting at the end as long as there
+		// are spaces.
+		var inicio = 0
+		var fin = str.length - 1;
+		for (;inicio < str.length && (str.charAt(inicio) == " "); inicio++);
+		if (inicio == str.length){
+			return "";
+		}else{
+			for (;fin >= 0 && (str.charAt(fin) == " "); fin--);
+			return str.substring(inicio, fin+1);
+		}
+	}
 }
 
 // static String	trimToEmpty(String str) 
 // Removes control characters (char <= 32) from both ends of this String returning an empty String ("") if the String is empty ("") after the trim or if it is null.
 StringUtils.trimToEmpty = function(str) {
-	throw new Error("UnsupportedOperationException")
+	if (str == null) {
+		return StringUtils.EMPTY;
+	}else{
+		return StringUtils.trim(str);
+	}
 }
 
 // static String	trimToNull(String str) 
 // Removes control characters (char <= 32) from both ends of this String returning null if the String is empty ("") after the trim or if it is null.
 StringUtils.trimToNull = function(str) {
-	throw new Error("UnsupportedOperationException")
+	var resultado = StringUtils.trim(str);
+	if (StringUtils.isEmpty(resultado)){
+		return null;
+	}else{
+		return resultado;
+	}
 }
 
 // static String	uncapitalize(String str) 
@@ -947,5 +977,8 @@ StringUtils.uncapitalize = function(str) {
 // static String	upperCase(String str) 
 // Converts a String to upper case as per String.toUpperCase().
 StringUtils.upperCase = function(str) {
-	throw new Error("UnsupportedOperationException")
+	if (str == null) {
+		return null;
+	}
+	return str.toUpperCase();
 }

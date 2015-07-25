@@ -452,7 +452,7 @@ QUnit.test( "trim(String str) ", function( assert ) {
 	assert.equal( StringUtils.trim("    abc    "), "abc","StringUtils.trim(\"    abc    \") = \"abc\"");
 });
 QUnit.test( "trimToEmpty(String str) ", function( assert ) {
-	assert.equal( StringUtils.trimToEmpty(null), null, "StringUtils.trimToEmpty(null) = \"\"");
+	assert.equal( StringUtils.trimToEmpty(null), "", "StringUtils.trimToEmpty(null) = \"\"");
 	assert.equal( StringUtils.trimToEmpty(""), "", "StringUtils.trimToEmpty(\"\") = \"\"");
 	assert.equal( StringUtils.trimToEmpty("     "), "", "StringUtils.trimToEmpty(\"     \") = \"\"");
 	assert.equal( StringUtils.trimToEmpty("abc"), "abc", "StringUtils.trimToEmpty(\"abc\") = \"abc\"");
