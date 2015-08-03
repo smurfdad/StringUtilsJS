@@ -330,13 +330,14 @@ StringUtils.endsWithIgnoreCase = function(str, suffix) {
 // static boolean	equals(String str1, String str2) 
 // Compares two Strings, returning true if they are equal.
 StringUtils.equals = function(str1, str2) {
-	throw new Error("UnsupportedOperationException")
+	return str1 === str2;
+	
 }
 
 // static boolean	equalsIgnoreCase(String str1, String str2) 
 // Compares two Strings, returning true if they are equal ignoring the case.
 StringUtils.equalsIgnoreCase = function(str1, str2) {
-	throw new Error("UnsupportedOperationException")
+	return StringUtils.equals(StringUtils.lowerCase(str1), StringUtils.lowerCase(str2));
 }
 
 // static String	getCommonPrefix(String[] strs) 
@@ -442,19 +443,19 @@ StringUtils.isAsciiPrintable = function(str) {
 // static boolean	isBlank(String str) 
 // Checks if a String is empty ("") or null.
 StringUtils.isBlank = function(str) {
-	throw new Error("UnsupportedOperationException")
+	return StringUtils.isEmpty(StringUtils.trim(str));
 }
 
 // static boolean	isNotBlank(String str) 
 // Checks if a String is not empty (""), not null and not whitespace only.
 StringUtils.isNotBlank = function(str) {
-	throw new Error("UnsupportedOperationException")
+	return !StringUtils.isBlank(str);
 }
 
 // static boolean	isNotEmpty(String str) 
 // Checks if a String is not empty ("") and not null.
 StringUtils.isNotEmpty = function(str) {
-	throw new Error("UnsupportedOperationException")
+	return !StringUtils.isEmpty(str);
 }
 
 // static boolean	isNumeric(String str) 
@@ -583,7 +584,7 @@ StringUtils.leftPad = function(pStr, pSize, pPadStr) {
 
 // static int	length(String str) 
 // Gets a String's length or 0 if the String is null.
-StringUtils.length = function(str) {
+StringUtils.size = function(str) {
 	if (str == null){
 		return 0;
 	}else{

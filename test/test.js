@@ -357,7 +357,11 @@ QUnit.test( "leftPad(String str, int size, Char/String padStr) ", function( asse
 	assert.equal( StringUtils.leftPad("bat", 1, 'z'), "bat", "StringUtils.leftPad(\"bat\", 1, \'z\') = \"bat\"");
 	assert.equal( StringUtils.leftPad("bat", -1, 'z'), "bat", "StringUtils.leftPad(\"bat\", -1, \'z\') = \"bat\"");
 });
-QUnit.test( "length(String str) ", function( assert ) {});
+QUnit.test( "size(String str)", function( assert ) {
+	assert.equal( StringUtils.size(null), 0, "StringUtils.size(null) = 0");
+	assert.equal( StringUtils.size(undefined), 0, "StringUtils.size(undefined) = 0");
+	assert.equal( StringUtils.size("abc"), 3, "StringUtils.size(\"abc\") = 3");	
+});
 QUnit.test( "lowerCase(String str) ", function( assert ) {
 	assert.equal( StringUtils.lowerCase(null), null, "StringUtils.lowerCase(null)  = null");
 	assert.equal( StringUtils.lowerCase(""), "", "StringUtils.lowerCase(\"\") = \"\"");
