@@ -260,7 +260,12 @@ QUnit.test( "defaultString(String str, String defaultStr) ", function( assert ) 
 	assert.equal( StringUtils.defaultString("", "NULL"), "", "StringUtils.defaultString(\"\", \"NULL\") = \"\"");
 	assert.equal( StringUtils.defaultString("bat", "NULL"), "bat", "StringUtils.defaultString(\"bat\", \"NULL\") = \"bat\"");
 });
-QUnit.skip( "deleteWhitespace(String str) ", function( assert ) {});
+QUnit.test( "deleteWhitespace(String str) ", function( assert ) {
+	assert.equal( StringUtils.deleteWhitespace(null),  null, "StringUtils.deleteWhitespace(null) = null");
+	assert.equal( StringUtils.deleteWhitespace(""),    "", "StringUtils.deleteWhitespace(\"\") = \"\"");
+	assert.equal( StringUtils.deleteWhitespace("abc"), "abc", "StringUtils.deleteWhitespace(\"abc\") = \"abc\"");
+	assert.equal( StringUtils.deleteWhitespace("   ab  c  "), "abc", "StringUtils.deleteWhitespace(\"   ab  c  \") = \"abc\"");
+});
 QUnit.skip( "difference(String str1, String str2) ", function( assert ) {});
 QUnit.skip( "endsWith(String str, String suffix) ", function( assert ) {});
 QUnit.skip( "endsWithAny(String string, String[] searchStrings) ", function( assert ) {});

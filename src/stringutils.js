@@ -326,7 +326,21 @@ StringUtils.defaultString = function(str, pDefaultStr) {
 // static String	deleteWhitespace(String str) 
 // Deletes all whitespaces from a String as defined by Character.isWhitespace(char).
 StringUtils.deleteWhitespace = function(str) {
-	throw new Error("UnsupportedOperationException")
+	if (StringUtils.isEmpty(str)) {
+        return str;
+    }
+    var sz = StringUtils.size(str);
+    var resultado = "";
+        var count = 0;
+        for (var i = 0; i < sz; i++) {
+            if (str.charAt(i) != " ") {
+                resultado += str.charAt(i);
+            }
+        }
+	if (count == sz) {
+		return str;
+	}
+    return resultado;
 }
 
 // static String	difference(String str1, String str2) 
