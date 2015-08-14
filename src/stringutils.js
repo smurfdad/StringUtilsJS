@@ -346,7 +346,17 @@ StringUtils.deleteWhitespace = function(str) {
 // static String	difference(String str1, String str2) 
 // Compares two Strings, and returns the portion where they differ.
 StringUtils.difference = function(str1, str2) {
-	throw new Error("UnsupportedOperationException")
+	if (str1 == null) {
+		return str2;
+	}
+	if (str2 == null) {
+		return str1;
+	}
+	var at = StringUtils.indexOfDifference(str1, str2);
+	if (at == StringUtils.INDEX_NOT_FOUND) {
+		return StringUtils.EMPTY;
+	}
+	return StringUtils.substring(str2, at)
 }
 
 // static boolean	endsWith(String str, String suffix) 
@@ -441,10 +451,73 @@ StringUtils.indexOfAnyBut = function(str, searchChars) {
 // Compares all Strings in an array and returns the index at which the Strings begin to differ.
 // static int	indexOfDifference(String str1, String str2) 
 // Compares two Strings, and returns the index at which the Strings begin to differ.
-StringUtils.indexOfDifference = function() {
-	throw new Error("UnsupportedOperationException")
-}
+StringUtils.indexOfDifference = function(param1, param2) {
+	var strs = [];
+	if (Array.isArray(param1)){
+		strs = param1;
+	}else if(typeof(param1) === "string"){
+		strs[0] = param1;
+	}
+	if (typeof(param2) === "string"){
+		strs[1] = param2;
+	}
+	
+	if (strs == null || strs.length <= 1) {
+		return StringUtils.INDEX_NOT_FOUND;
+	}
+	var anyStringNull = false;
+	var allStringsNull = true;
+	var arrayLen = strs.length;
+	var shortestStrLen = 2147483647;
+	var longestStrLen = 0;
 
+	// find the min and max string lengths; this avoids checking to make
+	// sure we are not exceeding the length of the string each time through
+	// the bottom loop.
+	for (var i = 0; i < arrayLen; i++) {
+		if (strs[i] == null) {
+			anyStringNull = true;
+			shortestStrLen = 0;
+		} else {
+			allStringsNull = false;
+			shortestStrLen = Math.min(strs[i].length, shortestStrLen);
+			longestStrLen = Math.max(strs[i].length, longestStrLen);
+		}
+	}
+
+	// handle lists containing all nulls or all empty strings
+	if (allStringsNull || (longestStrLen == 0 && !anyStringNull)) {
+		return StringUtils.INDEX_NOT_FOUND;
+	}
+
+	// handle lists containing some nulls or some empty strings
+	if (shortestStrLen == 0) {
+		return 0;
+	}
+
+	// find the position with the first difference across all strings
+	var firstDiff = -1;
+	for (var stringPos = 0; stringPos < shortestStrLen; stringPos++) {
+		var comparisonChar = strs[0].charAt(stringPos);
+		for (var arrayPos = 1; arrayPos < arrayLen; arrayPos++) {
+			if (strs[arrayPos].charAt(stringPos) != comparisonChar) {
+				firstDiff = stringPos;
+				break;
+			}
+		}
+		if (firstDiff != -1) {
+			break;
+		}
+	}
+
+	if (firstDiff == -1 && shortestStrLen != longestStrLen) {
+		// we compared all of the characters up to the length of the
+		// shortest string and didn't find a match, but the string lengths
+		// vary, so return the length of the shortest string.
+		return shortestStrLen;
+	}
+	return firstDiff;
+}
 // static int	indexOfIgnoreCase(String str, String searchStr) 
 // Case in-sensitive find of the first index within a String.
 // static int	indexOfIgnoreCase(String str, String searchStr, int startPos) 
@@ -953,8 +1026,36 @@ StringUtils.stripToNull = function(str) {
 // Gets a substring from the specified String avoiding exceptions.
 // static String	substring(String str, int start, int end) 
 // Gets a substring from the specified String avoiding exceptions.
-StringUtils.substring = function() {
-	throw new Error("UnsupportedOperationException")
+StringUtils.substring = function(str, start, end) {
+	if (str == null) {
+		return null;
+	}
+
+	// handle negatives
+	if (end < 0) {
+		end = str.length + end; // remember end is negative
+	}
+	if (start < 0) {
+		start = str.length + start; // remember start is negative
+	}
+
+	// check length next
+	if (end > str.length) {
+		end = str.length;
+	}
+	// if start is greater than end, return ""
+	if (start > end) {
+		return StringUtils.EMPTY;
+	}
+
+	if (start < 0) {
+		start = 0;
+	}
+	if (end < 0) {
+		end = 0;
+	}
+
+	return str.substring(start, end);
 }
 
 // static String	substringAfter(String str, String separator) 
