@@ -267,14 +267,36 @@ StringUtils.containsNone = function(str, searchChars) {
 // Checks if the String contains only certain characters.
 // static boolean	containsOnly(String str, String validChars) 
 // Checks if the String contains only certain characters.
-StringUtils.containsOnly = function() {
-	throw new Error("UnsupportedOperationException")
+StringUtils.containsOnly = function(str, pValid) {
+	var valid = pValid;
+	if(typeof(pValid) === "string"){
+		valid = pValid.split('');
+	}
+	if ((valid == null) || (str == null)) {
+		return false;
+	}
+	if (str.length == 0) {
+		return true;
+	}
+	if (valid.length == 0) {
+		return false;
+	}
+	return StringUtils.indexOfAnyBut(str, valid) == -1;
 }
 
 // static int	countMatches(String str, String sub) 
 // Counts how many times the substring appears in the larger String.
 StringUtils.countMatches = function(str, sub) {
-	throw new Error("UnsupportedOperationException")
+	if (StringUtils.isEmpty(str) || StringUtils.isEmpty(sub)) {
+		return 0;
+	}
+	var count = 0;
+	var idx = 0;
+	while ((idx = StringUtils.indexOf(str, sub, idx)) != -1) {
+		count++;
+		idx += StringUtils.size(sub);
+	}
+	return count;
 }
 
 // static String	defaultIfBlank(String str, String defaultStr) 
@@ -360,8 +382,15 @@ StringUtils.getLevenshteinDistance = function(s, t) {
 // Finds the first index within a String, handling null.
 // static int	indexOf(String str, String searchStr, int startPos) 
 // Finds the first index within a String, handling null.
-StringUtils.indexOf = function() {
-	throw new Error("UnsupportedOperationException")
+StringUtils.indexOf = function(str, searchChar, startPos) {
+	var start = startPos;
+	if (typeof(start) === "undefined" || !StringUtils.isNumeric(start)){
+		start = 0;
+	}
+	if (StringUtils.isEmpty(str)) {
+		return -1;
+	}
+	return str.indexOf(searchChar, start);
 }
 
 // static int	indexOfAny(String str, char[] searchChars) 
@@ -378,8 +407,16 @@ StringUtils.indexOfAny = function() {
 // Search a String to find the first index of any character not in the given set of characters.
 // static int	indexOfAnyBut(String str, String searchChars) 
 // Search a String to find the first index of any character not in the given set of characters.
-StringUtils.indexOfAnyBut = function() {
-	throw new Error("UnsupportedOperationException")
+StringUtils.indexOfAnyBut = function(str, searchChars) {
+	if (StringUtils.isEmpty(str) || StringUtils.isEmpty(searchChars)) {
+		return -1;
+	}
+	for (var i = 0; i < StringUtils.size(str); i++) {
+		if (searchChars.indexOf(str.charAt(i)) < 0) {
+			return i;
+		}
+	}
+	return -1;
 }
 
 // static int	indexOfDifference(String[] strs) 
@@ -413,7 +450,13 @@ StringUtils.isAllUpperCase = function(str) {
 // static boolean	isAlpha(String str) 
 // Checks if the String contains only unicode letters.
 StringUtils.isAlpha = function(str) {
-	throw new Error("UnsupportedOperationException")
+	if (str == null) {
+		return false;
+	}
+	if (StringUtils.isEmpty(str)){
+		return true;
+	}
+	return str.match(/^[a-z]+$/i) != null;
 }
 
 // static boolean	isAlphanumeric(String str) 
@@ -460,14 +503,29 @@ StringUtils.isNotEmpty = function(str) {
 
 // static boolean	isNumeric(String str) 
 // Checks if the String contains only unicode digits.
-StringUtils.isNumeric = function(str) {
-	throw new Error("UnsupportedOperationException")
+StringUtils.isNumeric = function(pStr) {
+	var str = pStr;
+	if (str == null || typeof(str)==="undefined") {
+		return false;
+	}
+	
+	if (StringUtils.isEmpty(str)){
+		return true;
+	}
+	var regexp = /^[0-9]+$/i;
+	return regexp.test(str);
 }
 
 // static boolean	isNumericSpace(String str) 
 // Checks if the String contains only unicode digits or space (' ').
 StringUtils.isNumericSpace = function(str) {
-	throw new Error("UnsupportedOperationException")
+		if (str == null) {
+		return false;
+	}
+	if (StringUtils.isEmpty(str)){
+		return true;
+	}
+	return str.match(/^[0-9\s]+$/i) != null
 }
 
 // static boolean	isWhitespace(String str) 

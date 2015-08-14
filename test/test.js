@@ -228,7 +228,15 @@ QUnit.test( "containsOnly(String str, String validChars) ", function( assert ) {
 	assert.equal( StringUtils.containsOnly("ab1", "abc"), false, "StringUtils.containsOnly(\"ab1\", \"abc\") = false");
 	assert.equal( StringUtils.containsOnly("abz", "abc"), false, "StringUtils.containsOnly(\"abz\", \"abc\") = false");
 });
-QUnit.skip( "countMatches(String str, String sub) ", function( assert ) {});
+QUnit.test( "countMatches(String str, String sub) ", function( assert ) {
+	assert.equal( StringUtils.countMatches(null, "*"), 0, "StringUtils.countMatches(null, *) = 0");
+	assert.equal( StringUtils.countMatches("", "*"), 0, "StringUtils.countMatches(\"\", *)  = 0");
+	assert.equal( StringUtils.countMatches("abba", null), 0, "StringUtils.countMatches(\"abba\", null) = 0");
+	assert.equal( StringUtils.countMatches("abba", ""), 0, "StringUtils.countMatches(\"abba\", \"\") = 0");
+	assert.equal( StringUtils.countMatches("abba", "a"), 2, "StringUtils.countMatches(\"abba\", \"a\") = 2");
+	assert.equal( StringUtils.countMatches("abba", "ab"), 1, "StringUtils.countMatches(\"abba\", \"ab\") = 1");
+	assert.equal( StringUtils.countMatches("abba", "xxx"), 0, "StringUtils.countMatches(\"abba\", \"xxx\") = 0");
+});
 QUnit.skip( "defaultIfBlank(String str, String defaultStr) ", function( assert ) {});
 QUnit.skip( "defaultIfEmpty(String str, String defaultStr) ", function( assert ) {});
 QUnit.skip( "defaultString(String str) ", function( assert ) {});
@@ -267,12 +275,30 @@ QUnit.test( "indexOf(String str, char/String searchChar, int startPos) ", functi
 	assert.equal( StringUtils.indexOf("aabaabaa", 'b', 3), 5, "StringUtils.indexOf(\"aabaabaa\", \'b\', 3) = 5");
 	assert.equal( StringUtils.indexOf("aabaabaa", 'b', 9), -1, "StringUtils.indexOf(\"aabaabaa\", \'b\', 9) = -1");
 	assert.equal( StringUtils.indexOf("aabaabaa", 'b', -1), 2, "StringUtils.indexOf(\"aabaabaa\", \'b\', -1) = 2");
+	assert.equal( StringUtils.indexOf("aabaabaa", 'b', "p"), 2, "StringUtils.indexOf(\"aabaabaa\", \'b\', \"p\") = 2");
 });
 QUnit.skip( "indexOfAny(String str, char[] searchChars) ", function( assert ) {});
 QUnit.skip( "indexOfAny(String str, String searchChars) ", function( assert ) {});
 QUnit.skip( "indexOfAny(String str, String[] searchStrs) ", function( assert ) {});
-QUnit.skip( "indexOfAnyBut(String str, char[] searchChars) ", function( assert ) {});
-QUnit.skip( "indexOfAnyBut(String str, String searchChars) ", function( assert ) {});
+QUnit.skip( "indexOfAnyBut(String str, char[] searchChars) ", function( assert ) {
+	//TODO: Dudas sobre esta definicion en tipo
+	// assert.equal( StringUtils.indexOfAnyBut(null, *), -1, "StringUtils.indexOfAnyBut(null, *)           = -1");
+	// assert.equal( StringUtils.indexOfAnyBut("", *), -1, "StringUtils.indexOfAnyBut("", *)             = -1");
+	// assert.equal( StringUtils.indexOfAnyBut(*, null), -1, "StringUtils.indexOfAnyBut(*, null)           = -1");
+	// assert.equal( StringUtils.indexOfAnyBut(*, []), -1, "StringUtils.indexOfAnyBut(*, [])             = -1");
+	// assert.equal( StringUtils.indexOfAnyBut("zzabyycdxx",['za']),  3, "StringUtils.indexOfAnyBut(\"zzabyycdxx\",[\'z\a\']) =  3");
+	// assert.equal( StringUtils.indexOfAnyBut("zzabyycdxx", ['']),  0, "StringUtils.indexOfAnyBut(\"zzabyycdxx\", [\'\'])  =  0");
+	// assert.equal( StringUtils.indexOfAnyBut("aba", 'ab'), -1, "StringUtils.indexOfAnyBut(\"aba\", \'ab\')       = -1");
+});
+QUnit.test( "indexOfAnyBut(String str, String searchChars) ", function( assert ) {
+	assert.equal( StringUtils.indexOfAnyBut(null, "abc"), -1, "StringUtils.indexOfAnyBut(null, *) = -1");
+	assert.equal( StringUtils.indexOfAnyBut("abc", "abc"), -1, "StringUtils.indexOfAnyBut(\"\", *)= -1");
+	assert.equal( StringUtils.indexOfAnyBut("abc", null), -1, "StringUtils.indexOfAnyBut(*, null) = -1");
+	assert.equal( StringUtils.indexOfAnyBut("abc", ""), -1, "StringUtils.indexOfAnyBut(*, \"\") = -1");
+	assert.equal( StringUtils.indexOfAnyBut("zzabyycdxx", "za"),  3, "StringUtils.indexOfAnyBut(\"zzabyycdxx\", \"za\") =  3");
+	assert.equal( StringUtils.indexOfAnyBut("zzabyycdxx", ""),  -1, "StringUtils.indexOfAnyBut(\"zzabyycdxx\", \"\")   =  0");
+	assert.equal( StringUtils.indexOfAnyBut("aba","ab"), -1, "StringUtils.indexOfAnyBut(\"aba\",\"ab\")         = -1");
+});
 QUnit.skip( "indexOfDifference(String[] strs) ", function( assert ) {});
 QUnit.skip( "indexOfDifference(String str1, String str2) ", function( assert ) {});
 QUnit.skip( "indexOfIgnoreCase(String str, String searchStr) ", function( assert ) {});
@@ -280,12 +306,12 @@ QUnit.skip( "indexOfIgnoreCase(String str, String searchStr, int startPos) ", fu
 QUnit.skip( "isAllLowerCase(String str) ", function( assert ) {});
 QUnit.skip( "isAllUpperCase(String str) ", function( assert ) {});
 QUnit.test( "isAlpha(String str) ", function( assert ) {
-assert.equal( StringUtils.isAlpha(null), false,"StringUtils.isAlpha(null) = false");
-assert.equal( StringUtils.isAlpha(""), true,"StringUtils.isAlpha(\"\") = true");
-assert.equal( StringUtils.isAlpha("  "), false,"StringUtils.isAlpha(\"  \") = false");
-assert.equal( StringUtils.isAlpha("abc"), true, "StringUtils.isAlpha(\"abc\") = true");
-assert.equal( StringUtils.isAlpha("ab2c"), false,"StringUtils.isAlpha(\"ab2c\") = false");
-assert.equal( StringUtils.isAlpha("ab-c"), false, "StringUtils.isAlpha(\"ab-c\") = false");
+	assert.equal( StringUtils.isAlpha(null), false,"StringUtils.isAlpha(null) = false");
+	assert.equal( StringUtils.isAlpha(""), true,"StringUtils.isAlpha(\"\") = true");
+	assert.equal( StringUtils.isAlpha("  "), false,"StringUtils.isAlpha(\"  \") = false");
+	assert.equal( StringUtils.isAlpha("abc"), true, "StringUtils.isAlpha(\"abc\") = true");
+	assert.equal( StringUtils.isAlpha("ab2c"), false,"StringUtils.isAlpha(\"ab2c\") = false");
+	assert.equal( StringUtils.isAlpha("ab-c"), false, "StringUtils.isAlpha(\"ab-c\") = false");
 });
 QUnit.skip( "isAlphanumeric(String str) ", function( assert ) {});
 QUnit.skip( "isAlphanumericSpace(String str) ", function( assert ) {});
@@ -312,8 +338,26 @@ QUnit.test( "isNotEmpty(String str) ", function( assert ) {
 	assert.equal( StringUtils.isNotEmpty("bob"), true, "StringUtils.isNotEmpty(\"bob\") = true");
 	assert.equal( StringUtils.isNotEmpty("  bob  "), true, "StringUtils.isNotEmpty(\"  bob  \") = true");
 });
-QUnit.skip( "isNumeric(String str) ", function( assert ) {});
-QUnit.skip( "isNumericSpace(String str) ", function( assert ) {});
+QUnit.test( "isNumeric(String str) ", function( assert ) {
+	assert.ok(StringUtils.isNumeric(null) == false,"StringUtils.isNumeric(null)= false");
+	assert.ok(StringUtils.isNumeric("")== true, "StringUtils.isNumeric(\"\") = true");
+	assert.ok(StringUtils.isNumeric("  ")== false, "StringUtils.isNumeric(\"  \") = false");
+	assert.ok(StringUtils.isNumeric("123")== true, "StringUtils.isNumeric(\"123\") = true");
+	assert.ok(StringUtils.isNumeric("12 3")== false, "StringUtils.isNumeric(\"12 3\") = false");
+	assert.ok(StringUtils.isNumeric("ab2c")== false, "StringUtils.isNumeric(\"ab2c\") = false");
+	assert.ok(StringUtils.isNumeric("12-3")== false, "StringUtils.isNumeric(\"12-3\") = false");
+	assert.ok(StringUtils.isNumeric("12.3")== false, "StringUtils.isNumeric(\"12.3\") = false");
+});
+QUnit.test( "isNumericSpace(String str) ", function( assert ) {
+	assert.ok(StringUtils.isNumericSpace(null) == false,"StringUtils.isNumericSpace(null)= false");
+	assert.ok(StringUtils.isNumericSpace("") == true, "StringUtils.isNumericSpace(\"\") = true");
+	assert.ok(StringUtils.isNumericSpace("  ")== true, "StringUtils.isNumericSpace(\"  \") = true");
+	assert.ok(StringUtils.isNumericSpace("123")== true, "StringUtils.isNumericSpace(\"123\") = true");
+	assert.ok(StringUtils.isNumericSpace("12 3")== true, "StringUtils.isNumericSpace(\"12 3\") = true");
+	assert.ok(StringUtils.isNumericSpace("ab2c")== false, "StringUtils.isNumericSpace(\"ab2c\") = false");
+	assert.ok(StringUtils.isNumericSpace("12-3")== false, "StringUtils.isNumericSpace(\"12-3\") = false");
+	assert.ok(StringUtils.isNumericSpace("12.3")== false, "StringUtils.isNumericSpace(\"12.3\") = false");	
+});
 QUnit.skip( "isWhitespace(String str) ", function( assert ) {});
 QUnit.skip( "join(Collection collection, char separator) ", function( assert ) {});
 QUnit.skip( "join(Collection collection, String separator) ", function( assert ) {});
