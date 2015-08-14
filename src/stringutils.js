@@ -302,21 +302,25 @@ StringUtils.countMatches = function(str, sub) {
 // static String	defaultIfBlank(String str, String defaultStr) 
 // Returns either the passed in String, or if the String is whitespace, empty ("") or null, the value of defaultStr.
 StringUtils.defaultIfBlank = function(str, defaultStr) {
-	throw new Error("UnsupportedOperationException")
+	return StringUtils.isBlank(str)? defaultStr: str;
 }
 
 // static String	defaultIfEmpty(String str, String defaultStr) 
 // Returns either the passed in String, or if the String is empty or null, the value of defaultStr.
 StringUtils.defaultIfEmpty = function(str, defaultStr) {
-	throw new Error("UnsupportedOperationException")
+	return StringUtils.isEmpty(str)? defaultStr: str;
 }
 
 // static String	defaultString(String str) 
 // Returns either the passed in String, or if the String is null, an empty String ("").
 // static String	defaultString(String str, String defaultStr) 
 // Returns either the passed in String, or if the String is null, the value of defaultStr.
-StringUtils.defaultString = function() {
-	throw new Error("UnsupportedOperationException")
+StringUtils.defaultString = function(str, pDefaultStr) {
+	var defaultStr = pDefaultStr;
+	if (typeof(defaultStr) === "undefined"){
+		defaultStr = StringUtils.EMPTY;
+	}
+	return str == null ? defaultStr : str;
 }
 
 // static String	deleteWhitespace(String str) 

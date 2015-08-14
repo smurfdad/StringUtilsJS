@@ -237,10 +237,29 @@ QUnit.test( "countMatches(String str, String sub) ", function( assert ) {
 	assert.equal( StringUtils.countMatches("abba", "ab"), 1, "StringUtils.countMatches(\"abba\", \"ab\") = 1");
 	assert.equal( StringUtils.countMatches("abba", "xxx"), 0, "StringUtils.countMatches(\"abba\", \"xxx\") = 0");
 });
-QUnit.skip( "defaultIfBlank(String str, String defaultStr) ", function( assert ) {});
-QUnit.skip( "defaultIfEmpty(String str, String defaultStr) ", function( assert ) {});
-QUnit.skip( "defaultString(String str) ", function( assert ) {});
-QUnit.skip( "defaultString(String str, String defaultStr) ", function( assert ) {});
+QUnit.test( "defaultIfBlank(String str, String defaultStr) ", function( assert ) {
+	assert.equal( StringUtils.defaultIfBlank(null, "NULL"), "NULL", "StringUtils.defaultIfBlank(null, \"NULL\") = \"NULL\"");
+	assert.equal( StringUtils.defaultIfBlank("", "NULL"), "NULL", "StringUtils.defaultIfBlank(\"\", \"NULL\") = \"NULL\"");
+	assert.equal( StringUtils.defaultIfBlank(" ", "NULL"), "NULL", "StringUtils.defaultIfBlank(\" \", \"NULL\") = \"NULL\"");
+	assert.equal( StringUtils.defaultIfBlank("bat", "NULL"), "bat", "StringUtils.defaultIfBlank(\"bat\", \"NULL\") = \"bat\"");
+	assert.equal( StringUtils.defaultIfBlank("", null), null, "StringUtils.defaultIfBlank(\"\", null) = null");
+});
+QUnit.test( "defaultIfEmpty(String str, String defaultStr) ", function( assert ) {
+	assert.equal(StringUtils.defaultIfEmpty(null, "NULL"), "NULL", "StringUtils.defaultIfEmpty(null, \"NULL\") = \"NULL\"");
+	assert.equal(StringUtils.defaultIfEmpty("", "NULL"), "NULL", "StringUtils.defaultIfEmpty(\"\", \"NULL\") = \"NULL\"");
+	assert.equal(StringUtils.defaultIfEmpty("bat", "NULL"),  "bat", "StringUtils.defaultIfEmpty(\"bat\", \"NULL\") = \"bat\"");
+	assert.equal(StringUtils.defaultIfEmpty("", null), null, "StringUtils.defaultIfEmpty(\"\", null) = null");
+});
+QUnit.test( "defaultString(String str) ", function( assert ) {
+	assert.equal( StringUtils.defaultString(null), "", "StringUtils.defaultString(null)  = \"\"");
+	assert.equal( StringUtils.defaultString(""), "", "StringUtils.defaultString(\"\")    = \"\"");
+	assert.equal( StringUtils.defaultString("bat"), "bat", "StringUtils.defaultString(\"bat\") = \"bat\"");
+});
+QUnit.test( "defaultString(String str, String defaultStr) ", function( assert ) {
+	assert.equal( StringUtils.defaultString(null, "NULL"), "NULL", "StringUtils.defaultString(null, \"NULL\") = \"NULL\"");
+	assert.equal( StringUtils.defaultString("", "NULL"), "", "StringUtils.defaultString(\"\", \"NULL\") = \"\"");
+	assert.equal( StringUtils.defaultString("bat", "NULL"), "bat", "StringUtils.defaultString(\"bat\", \"NULL\") = \"bat\"");
+});
 QUnit.skip( "deleteWhitespace(String str) ", function( assert ) {});
 QUnit.skip( "difference(String str1, String str2) ", function( assert ) {});
 QUnit.skip( "endsWith(String str, String suffix) ", function( assert ) {});
