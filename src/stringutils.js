@@ -361,8 +361,23 @@ StringUtils.difference = function(str1, str2) {
 
 // static boolean	endsWith(String str, String suffix) 
 // Check if a String ends with a specified suffix.
-StringUtils.endsWith = function(str, suffix) {
-	throw new Error("UnsupportedOperationException")
+StringUtils.endsWith = function(str, suffix, pIgnoreCase) {
+	var ignoreCase = pIgnoreCase;
+	if (typeof(ignoreCase) === "undefined"){
+		ignoreCase = false;
+	}
+	if (str == null || suffix == null) {
+		return (str == null && suffix == null);
+	}
+	if (suffix.length > str.length) {
+		return false;
+	}
+	var strOffset = str.length - suffix.length;
+	if (ignoreCase){
+		return StringUtils.equalsIgnoreCase(StringUtils.right(str, suffix.length), suffix);
+	}else{
+		return StringUtils.equals(StringUtils.right(str, suffix.length), suffix);
+	}
 }
 
 // static boolean	endsWithAny(String string, String[] searchStrings) 
@@ -374,7 +389,7 @@ StringUtils.endsWithAny = function(string, searchStrings) {
 // static boolean	endsWithIgnoreCase(String str, String suffix) 
 // Case insensitive check if a String ends with a specified suffix.
 StringUtils.endsWithIgnoreCase = function(str, suffix) {
-	throw new Error("UnsupportedOperationException")
+	return StringUtils.endsWith(str, suffix, true);
 }
 
 // static boolean	equals(String str1, String str2) 
@@ -529,13 +544,25 @@ StringUtils.indexOfIgnoreCase = function() {
 // static boolean	isAllLowerCase(String str) 
 // Checks if the String contains only lowercase characters.
 StringUtils.isAllLowerCase = function(str) {
-	throw new Error("UnsupportedOperationException")
+	if (str == null){
+		return false;
+	}
+	if (StringUtils.isBlank(str)){
+		return false;
+	}
+	return StringUtils.isAlpha(str) && StringUtils.equals(str, StringUtils.lowerCase(str));
 }
 
 // static boolean	isAllUpperCase(String str) 
 // Checks if the String contains only uppercase characters.
 StringUtils.isAllUpperCase = function(str) {
-	throw new Error("UnsupportedOperationException")
+	if (str == null){
+		return false;
+	}
+	if (StringUtils.isBlank(str)){
+		return false;
+	}	
+	return StringUtils.isAlpha(str) && StringUtils.equals(str, StringUtils.upperCase(str));
 }
 
 // static boolean	isAlpha(String str) 
@@ -659,7 +686,6 @@ StringUtils.lastIndexOf = function() {
 	throw new Error("UnsupportedOperationException")
 }
 
-
 // static int	lastIndexOfAny(String str, String[] searchStrs) 
 // Find the latest index of any of a set of potential substrings.
 StringUtils.lastIndexOfAny = function(str, searchStrs) {
@@ -683,7 +709,16 @@ StringUtils.lastOrdinalIndexOf = function(str, searchStr, ordinal) {
 // static String	left(String str, int len) 
 // Gets the leftmost len characters of a String.
 StringUtils.left = function(str, len) {
-	throw new Error("UnsupportedOperationException")
+	if (str == null) {
+		return null;
+	}
+	if (len < 0) {
+		return StringUtils.EMPTY;
+	}
+	if (str.length <= len) {
+		return str;
+	}
+	return StringUtils.substring(str, 0, len);
 }
 
 // static String	leftPad(String str, int size) 
@@ -753,7 +788,19 @@ StringUtils.lowerCase = function(str) {
 // static String	mid(String str, int pos, int len) 
 // Gets len characters from the middle of a String.
 StringUtils.mid = function(str, pos, len) {
-	throw new Error("UnsupportedOperationException")
+	if (str == null) {
+		return null;
+	}
+	if (len < 0 || pos > str.length) {
+		return StringUtils.EMPTY;
+	}
+	if (pos < 0) {
+		pos = 0;
+	}
+	if (str.length <= (pos + len)) {
+		return StringUtils.substring(str, pos);
+	}
+	return StringUtils.substring(str, pos, pos + len);
 }
 
 // static String	normalizeSpace(String str) 
@@ -863,7 +910,16 @@ StringUtils.reverseDelimited = function(str, separatorChar) {
 // static String	right(String str, int len) 
 // Gets the rightmost len characters of a String.
 StringUtils.right = function(str, len) {
-	throw new Error("UnsupportedOperationException")
+	if (str == null) {
+		return null;
+	}
+	if (len < 0) {
+		return StringUtils.EMPTY;
+	}
+	if (str.length <= len) {
+		return str;
+	}
+	return StringUtils.substring(str, str.length - len);
 }
 
 // static String	rightPad(String str, int size) 
@@ -1099,7 +1155,19 @@ StringUtils.substringsBetween = function(str, open, close) {
 // static String	swapCase(String str) 
 // Swaps the case of a String changing upper and title case to lower case, and lower case to upper case.
 StringUtils.swapCase = function(str) {
-	throw new Error("UnsupportedOperationException")
+	if (str == null){
+		return null;
+	}
+	var caracs = str.split('');
+	var resultado = StringUtils.EMPTY;
+	for(var i=0; i < caracs.length; i++){
+		if (StringUtils.isAllLowerCase(caracs[i])){
+			resultado += StringUtils.upperCase(caracs[i]);
+		}else{
+			resultado += StringUtils.lowerCase(caracs[i]);
+		}
+	}
+	return resultado;
 }
 
 // static String	trim(String str) 

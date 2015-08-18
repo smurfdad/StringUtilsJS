@@ -1,9 +1,7 @@
 QUnit.module( "StringUtils", {
 	beforeEach: function() {
-		
 	},
 	afterEach: function() {
-		
 	}
 });
 QUnit.test( "abbreviate(str, maxWidth)", function( assert ) {	
@@ -276,9 +274,39 @@ QUnit.test( "difference(String str1, String str2) ", function( assert ) {
 	assert.equal( StringUtils.difference("abcde", "abxyz"), "xyz", "StringUtils.difference(\"abcde\", \"abxyz\") = \"xyz\"");
 	assert.equal( StringUtils.difference("abcde", "xyz"), "xyz", "StringUtils.difference(\"abcde\", \"xyz\")   = \"xyz\"");
 });
-QUnit.skip( "endsWith(String str, String suffix) ", function( assert ) {});
+QUnit.test( "endsWith(String str, String suffix) ", function( assert ) {
+	assert.equal( StringUtils.endsWith(null, null) ,  true, "StringUtils.endsWith(null, null) =  true");
+	assert.equal( StringUtils.endsWith(null, "def"), false, "StringUtils.endsWith(null, \"def\") = false");
+	assert.equal( StringUtils.endsWith("abcdef", null), false, "StringUtils.endsWith(\"abcdef\", null) = false");
+	assert.equal( StringUtils.endsWith("abcdef", "def"),  true, "StringUtils.endsWith(\"abcdef\", \"def\") =  true");
+	assert.equal( StringUtils.endsWith("ABCDEF", "def"), false, "StringUtils.endsWith(\"ABCDEF\", \"def\") = false");
+	assert.equal( StringUtils.endsWith("ABCDEF", "cde"), false, "StringUtils.endsWith(\"ABCDEF\", \"cde\") = false");
+});
+QUnit.test( "endsWith(String str, String suffix, boolean ignoreCase) ", function( assert ) {
+	assert.equal( StringUtils.endsWith(null, null, true) ,  true, "StringUtils.endsWith(null, null, true) =  true");
+	assert.equal( StringUtils.endsWith(null, "def", true), false, "StringUtils.endsWith(null, \"def\", true) = false");
+	assert.equal( StringUtils.endsWith("abcdef", null, true), false, "StringUtils.endsWith(\"abcdef\", null, true) = false");
+	assert.equal( StringUtils.endsWith("abcdef", "def", true),  true, "StringUtils.endsWith(\"abcdef\", \"def\", true) =  true");
+	assert.equal( StringUtils.endsWith("ABCDEF", "def", true), true, "StringUtils.endsWith(\"ABCDEF\", \"def\", true) = true");
+	assert.equal( StringUtils.endsWith("ABCDEF", "cde", true), false, "StringUtils.endsWith(\"ABCDEF\", \"cde\", true) = false");
+	//---
+	assert.equal( StringUtils.endsWith(null, null, false) ,  true, "StringUtils.endsWith(null, null, false) =  true");
+	assert.equal( StringUtils.endsWith(null, "def", false), false, "StringUtils.endsWith(null, \"def\", false) = false");
+	assert.equal( StringUtils.endsWith("abcdef", null, false), false, "StringUtils.endsWith(\"abcdef\", null, false) = false");
+	assert.equal( StringUtils.endsWith("abcdef", "def", false),  true, "StringUtils.endsWith(\"abcdef\", \"def\", false) =  true");
+	assert.equal( StringUtils.endsWith("ABCDEF", "def", false), false, "StringUtils.endsWith(\"ABCDEF\", \"def\", false) = false");
+	assert.equal( StringUtils.endsWith("ABCDEF", "cde", false), false, "StringUtils.endsWith(\"ABCDEF\", \"cde\", flase) = false");
+
+});
 QUnit.skip( "endsWithAny(String string, String[] searchStrings) ", function( assert ) {});
-QUnit.skip( "endsWithIgnoreCase(String str, String suffix) ", function( assert ) {});
+QUnit.test( "endsWithIgnoreCase(String str, String suffix) ", function( assert ) {
+	assert.equal( StringUtils.endsWithIgnoreCase(null, null),  true, "StringUtils.endsWithIgnoreCase(null, null) = true");
+	assert.equal( StringUtils.endsWithIgnoreCase(null, "def"), false, "StringUtils.endsWithIgnoreCase(null, \"def\") = false");
+	assert.equal( StringUtils.endsWithIgnoreCase("abcdef", null), false, "StringUtils.endsWithIgnoreCase(\"abcdef\", null) = false");
+	assert.equal( StringUtils.endsWithIgnoreCase("abcdef", "def"),  true, "StringUtils.endsWithIgnoreCase(\"abcdef\", \"def\") =  true");
+	assert.equal( StringUtils.endsWithIgnoreCase("ABCDEF", "def"),  true, "StringUtils.endsWithIgnoreCase(\"ABCDEF\", \"def\") =  true");
+	assert.equal( StringUtils.endsWithIgnoreCase("ABCDEF", "cde"), false, "StringUtils.endsWithIgnoreCase(\"ABCDEF\", \"cde\") = false");
+});
 QUnit.test( "equals(String str1, String str2) ", function( assert ) {
 	assert.equal( StringUtils.equals(null, null), true, "StringUtils.equals(null, null) = true");
 	assert.equal( StringUtils.equals(null, "abc"), false, "StringUtils.equals(null, \"abc\") = false");
@@ -363,8 +391,22 @@ QUnit.test( "indexOfDifference(String str1, String str2) ", function( assert ) {
 });
 QUnit.skip( "indexOfIgnoreCase(String str, String searchStr) ", function( assert ) {});
 QUnit.skip( "indexOfIgnoreCase(String str, String searchStr, int startPos) ", function( assert ) {});
-QUnit.skip( "isAllLowerCase(String str) ", function( assert ) {});
-QUnit.skip( "isAllUpperCase(String str) ", function( assert ) {});
+QUnit.test( "isAllLowerCase(String str) ", function( assert ) {
+	assert.equal( StringUtils.isAllLowerCase(null), false, "StringUtils.isAllLowerCase(null) = false");
+	assert.equal( StringUtils.isAllLowerCase(""), false, "StringUtils.isAllLowerCase(\"\") = false");
+	assert.equal( StringUtils.isAllLowerCase("  "), false, "StringUtils.isAllLowerCase(\"  \") = false");
+	assert.equal( StringUtils.isAllLowerCase("abc"),  true, "StringUtils.isAllLowerCase(\"abc\") = true");
+	assert.equal( StringUtils.isAllLowerCase("abC"), false, "StringUtils.isAllLowerCase(\"abC\") = false");
+	assert.equal( StringUtils.isAllLowerCase("ab c"), false, "StringUtils.isAllLowerCase(\"ab c\") = false");
+});
+QUnit.test( "isAllUpperCase(String str) ", function( assert ) {
+	assert.equal( StringUtils.isAllUpperCase(null) , false, "StringUtils.isAllUpperCase(null) = false");
+	assert.equal( StringUtils.isAllUpperCase("")   , false, "StringUtils.isAllUpperCase(\"\") = false");
+	assert.equal( StringUtils.isAllUpperCase("  ") , false, "StringUtils.isAllUpperCase(\"  \") = false");
+	assert.equal( StringUtils.isAllUpperCase("ABC"),  true, "StringUtils.isAllUpperCase(\"ABC\") = true");
+	assert.equal( StringUtils.isAllUpperCase("aBC"), false, "StringUtils.isAllUpperCase(\"aBC\") = false");
+	assert.equal( StringUtils.isAllUpperCase("AB C"), false, "StringUtils.isAllUpperCase(\"AB C\") = false");
+});
 QUnit.test( "isAlpha(String str) ", function( assert ) {
 	assert.equal( StringUtils.isAlpha(null), false,"StringUtils.isAlpha(null) = false");
 	assert.equal( StringUtils.isAlpha(""), true,"StringUtils.isAlpha(\"\") = true");
@@ -436,7 +478,14 @@ QUnit.skip( "lastIndexOfAny(String str, String[] searchStrs) ", function( assert
 QUnit.skip( "lastIndexOfIgnoreCase(String str, String searchStr) ", function( assert ) {});
 QUnit.skip( "lastIndexOfIgnoreCase(String str, String searchStr, int startPos) ", function( assert ) {});
 QUnit.skip( "lastOrdinalIndexOf(String str, String searchStr, int ordinal) ", function( assert ) {});
-QUnit.skip( "left(String str, int len) ", function( assert ) {});
+QUnit.test( "left(String str, int len) ", function( assert ) {
+	assert.equal(StringUtils.left(null, 3) ,  null, "StringUtils.left(null, *)      =    null");
+	assert.equal(StringUtils.left("abc", -3)  ,    "", "StringUtils.left(*, -ve)       =    \"\"");
+	assert.equal(StringUtils.left("", 3)   ,    "", "StringUtils.left(\"\", *)      =    \"\"");
+	assert.equal(StringUtils.left("abc", 0),    "", "StringUtils.left(\"abc\", 0)   =    \"\"");
+	assert.equal(StringUtils.left("abc", 2),  "ab", "StringUtils.left(\"abc\", 2)   =  \"ab\"");
+	assert.equal(StringUtils.left("abc", 4), "abc", "StringUtils.left(\"abc\", 4)   = \"abc\"");
+});
 QUnit.test( "leftPad(String str, int size) ", function( assert ) {
 	assert.equal( StringUtils.leftPad(null, 3), null, "StringUtils.leftPad(null, *) = null");
 	assert.equal( StringUtils.leftPad("", 3), "   ", "StringUtils.leftPad(\"\", 3) = \"   \"");
@@ -471,7 +520,16 @@ QUnit.test( "lowerCase(String str) ", function( assert ) {
 	assert.equal( StringUtils.lowerCase(""), "", "StringUtils.lowerCase(\"\") = \"\"");
 	assert.equal( StringUtils.lowerCase("aBc"), "abc", "StringUtils.lowerCase(\"aBc\") = \"abc\"");
 });
-QUnit.skip( "mid(String str, int pos, int len) ", function( assert ) {});
+QUnit.test( "mid(String str, int pos, int len) ", function( assert ) {
+	assert.equal( StringUtils.mid(null, 0, 2)  ,  null, "StringUtils.mid(null, *, *)      =    null");
+	assert.equal( StringUtils.mid("abc", 0, -2),    "", "StringUtils.mid(*, *, -ve)       =    \"\"");
+	assert.equal( StringUtils.mid("", 0, 2)    ,    "", "StringUtils.mid(\"\", 0, *)      =    \"\"");
+	assert.equal( StringUtils.mid("abc", 0, 2) ,  "ab", "StringUtils.mid(\"abc\", 0, 2)   =  \"ab\"");
+	assert.equal( StringUtils.mid("abc", 0, 4) , "abc", "StringUtils.mid(\"abc\", 0, 4)   = \"abc\"");
+	assert.equal( StringUtils.mid("abc", 2, 4) ,   "c", "StringUtils.mid(\"abc\", 2, 4)   =   \"c\"");
+	assert.equal( StringUtils.mid("abc", 4, 2) ,    "", "StringUtils.mid(\"abc\", 4, 2)   =    \"\"");
+	assert.equal( StringUtils.mid("abc", -2, 2),  "ab", "StringUtils.mid(\"abc\", -2, 2)  =  \"ab\"");
+});
 QUnit.skip( "normalizeSpace(String str) ", function( assert ) {});
 QUnit.skip( "ordinalIndexOf(String str, String searchStr, int ordinal) ", function( assert ) {});
 QUnit.skip( "overlay(String str, String overlay, int start, int end) ", function( assert ) {});
@@ -492,7 +550,14 @@ QUnit.skip( "replaceEachRepeatedly(String text, String[] searchList, String[] re
 QUnit.skip( "replaceOnce(String text, String searchString, String replacement) ", function( assert ) {});
 QUnit.skip( "reverse(String str) ", function( assert ) {});
 QUnit.skip( "reverseDelimited(String str, char separatorChar) ", function( assert ) {});
-QUnit.skip( "right(String str, int len) ", function( assert ) {});
+QUnit.test( "right(String str, int len) ", function( assert ) {
+	assert.equal( StringUtils.right(null, 3)  ,  null, "StringUtils.right(null, *)      =    null");
+	assert.equal( StringUtils.right("abc", -3),    "", "StringUtils.right(*, -ve)       =    \"\"");
+	assert.equal( StringUtils.right("", 3)    ,    "", "StringUtils.right(\"\", *)      =    \"\"");
+	assert.equal( StringUtils.right("abc", 0) ,    "", "StringUtils.right(\"abc\", 0)   =    \"\"");
+	assert.equal( StringUtils.right("abc", 2) ,  "bc", "StringUtils.right(\"abc\", 2)   =  \"bc\"");
+	assert.equal( StringUtils.right("abc", 4) , "abc", "StringUtils.right(\"abc\", 4)   = \"abc\"");
+});
 QUnit.test( "rightPad(String str, int size) ", function( assert ) {
 	assert.equal( StringUtils.rightPad(null, 3), null, "StringUtils.rightPad(null, *) = null");
 	assert.equal( StringUtils.rightPad("", 3), "   ", "StringUtils.rightPad(\"\", 3) = \"   \"");
@@ -569,7 +634,11 @@ QUnit.skip( "substringBeforeLast(String str, String separator) ", function( asse
 QUnit.skip( "substringBetween(String str, String tag) ", function( assert ) {});
 QUnit.skip( "substringBetween(String str, String open, String close) ", function( assert ) {});
 QUnit.skip( "substringsBetween(String str, String open, String close) ", function( assert ) {});
-QUnit.skip( "swapCase(String str) ", function( assert ) {});
+QUnit.test( "swapCase(String str) ", function( assert ) {
+	assert.equal( StringUtils.swapCase(null), null, "StringUtils.swapCase(null) = null");
+	assert.equal( StringUtils.swapCase(""), "", "StringUtils.swapCase(\"\") = \"\"");
+	assert.equal( StringUtils.swapCase("The dog has a BONE"), "tHE DOG HAS A bone", "StringUtils.swapCase(\"The dog has a BONE\") = \"tHE DOG HAS A bone\"");
+});
 QUnit.test( "trim(String str) ", function( assert ) {
 	assert.equal( StringUtils.trim(null), null, "StringUtils.trim(null) = null");
 	assert.equal( StringUtils.trim(""), "", "StringUtils.trim(\"\") = \"\"");
